@@ -35,7 +35,29 @@ public class TestingController {
 		return jdbc.update("insert into biodata(nik,nama,alamat,id_salary) values ('"+biodata.getNik()+"','"+biodata.getNama()+"','"+biodata.getAlamat()+"',"+biodata.getId_salary()+")");
 		
 	}
+	//PR
+	public int updateBiodata(String nik) {
+		return 0;
+		
+	}
 	
+	public int deleteBiodata(String nik) {
+		return 0;
+	}
+	
+	@RequestMapping("/delete/")
+	public String deleteBiodata() {
+		
+		
+		return "";
+	}
+	
+	@RequestMapping("/update/")
+	public String updateBiodata() {
+		
+		
+		return "";
+	}
 	
 
 	@RequestMapping(method = RequestMethod.GET, value = "/")
