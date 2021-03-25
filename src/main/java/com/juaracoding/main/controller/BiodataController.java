@@ -21,10 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.juaracoding.main.dao.DaoBiodata;
 import com.juaracoding.main.model.Biodata;
 import com.juaracoding.main.model.BiodataRowMapper;
+import com.juaracoding.main.model.KPR;
+import com.juaracoding.main.model.KPRDataPost;
+import com.juaracoding.main.model.KPRRowMapper;
 
 @RestController
 @RequestMapping("/biodata")
-public class TestingController {
+public class BiodataController {
 
 	@Autowired
 	JdbcTemplate jdbc;
@@ -36,6 +39,16 @@ public class TestingController {
 		List<Biodata> biodata = jdbc.query(sql, new BiodataRowMapper());
 
 		return biodata;
+
+	}
+	
+	public List<KPR> getKPR() {
+
+		String sql = " CALL `ulangBulan`('2021-03-24 00:00:00.000000', '15000000', '1.2', '12')";
+
+		List<KPR> kpr = jdbc.query(sql, new KPRRowMapper());
+
+		return kpr;
 
 	}
 
@@ -54,11 +67,13 @@ public class TestingController {
 	}
 
 	public int deleteBiodata(String nik) {
-		return jdbc.update("DELETE FROM `biodata` WHERE `nik` = '" + nik + "';");
+		return jdbc.update("DELETE FROM `biodata`  WHERE `nik` = '" + nik + "';");
+		
+	
 	}
 
 	
-	
+
 
 	 @PostMapping("/")
 	    public String add(@RequestBody Biodata biodata) {
@@ -69,6 +84,17 @@ public class TestingController {
 			} else {
 				return "Insert data gagal";
 			}
+	    }
+	 
+	 @PostMapping("/showKpr")
+	    public List<KPR> lstKpr(@RequestBody KPRDataPost dataKpr) {
+		 
+	    	 String sql = " CALL `ulangBulan`('"+dataKpr.getDf()+"', '"+dataKpr.getPlatfond()+"', '"+dataKpr.getBunga()+"', '"+dataKpr.getLamapijaman()+"')";
+
+			List<KPR> kpr = jdbc.query(sql, new KPRRowMapper());
+
+			return kpr;
+			
 	    }
 	 
 	 
@@ -82,6 +108,11 @@ public class TestingController {
 	 @GetMapping("/")
 	    public List<Biodata> list() {
 	        return getBiodata();
+	    }
+	 
+	 @GetMapping("/kpr")
+	    public List<KPR> kpr() {
+	        return getKPR();
 	    }
 	 
 	 @PutMapping("/{nik}")
