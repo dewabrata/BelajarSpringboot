@@ -27,7 +27,7 @@ import com.juaracoding.main.model.KPRRowMapper;
 
 @RestController
 @RequestMapping("/biodata")
-public class BiodataController {
+public class BiodataController  {
 
 	@Autowired
 	JdbcTemplate jdbc;
@@ -73,7 +73,6 @@ public class BiodataController {
 	}
 
 	
-
 
 	 @PostMapping("/")
 	    public String add(@RequestBody Biodata biodata) {

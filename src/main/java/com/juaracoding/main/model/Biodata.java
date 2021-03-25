@@ -6,7 +6,9 @@ public class Biodata {
   private String nama;
   private String alamat;
   private int id_salary;
-  
+  public Biodata() {
+	  
+  }
   
 public String getNik() {
 	return nik;
